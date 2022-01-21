@@ -5,6 +5,7 @@ const pool = require("./config")
 const session = require("express-session")
 
 const user = require('./routes/user')
+const post = require('./routes/post')
 
 const app = express()
 const port = process.env.PORT || 9001
@@ -21,6 +22,7 @@ app.use(
 );
 
 app.use('/user', user)
+app.use('/post', post)
 
 app.listen(port, () =>
     console.log(`Listening on port ${port}`)

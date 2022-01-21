@@ -18,6 +18,9 @@ router.post('/register', (req, res) => {
         })
     } else {
 
+
+
+        
     const firstname = req.body.firstname
     const lastname = req.body.lastname
     const username = req.body.username
@@ -28,12 +31,14 @@ router.post('/register', (req, res) => {
 
     pool.query('INSERT INTO "user" (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING *', [firstname, lastname, username, hash], (error, results) => {
         if (error) {
-            throw error
+            res.status(500).json({
+                status: 500,
+                message: "Username is taken"
+            })
         }
     res.status(200).json({
         status: 200,
-        message: "Account Created",
-        results: results
+        message: "Account Created"
     })
     })}
 })
