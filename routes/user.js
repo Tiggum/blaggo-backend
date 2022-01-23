@@ -1,4 +1,3 @@
-var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt')
 const { pool } = require('../config.js')
@@ -6,17 +5,17 @@ const { pool } = require('../config.js')
 router.post('/register', (req, res) => {
 
 
-    if (
-    !req.body.hasOwnProperty('firstname') ||
-    !req.body.hasOwnProperty('lastname') ||
-    !req.body.hasOwnProperty('username') ||
-    !req.body.hasOwnProperty('password')
-    ) {
-        res.status(500).json({
-            status: 500,
-            message: "Missing information"            
-        })
-    } else {
+    // if (
+    // !req.body.hasOwnProperty('firstname') ||
+    // !req.body.hasOwnProperty('lastname') ||
+    // !req.body.hasOwnProperty('username') ||
+    // !req.body.hasOwnProperty('password')
+    // ) {
+    //     res.status(500).json({
+    //         status: 500,
+    //         message: "Missing information"            
+    //     })
+    // } else {
 
 
 
@@ -40,7 +39,7 @@ router.post('/register', (req, res) => {
         status: 200,
         message: "Account Created"
     })
-    })}
+    })
 })
 
 router.post('/login', (req, res) => {

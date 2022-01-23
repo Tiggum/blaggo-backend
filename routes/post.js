@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     
-    const userid = req.body.userid
+    const userid = req.session.user.id
     const title = req.body.title
     const content = req.body.content
     
