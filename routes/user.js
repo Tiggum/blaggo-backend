@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
         if (error) {
             res.status(500).json({
                 status: 500,
-                message: "Username is taken"
+                message: error
             })
         } else {
             console.log('after')   
