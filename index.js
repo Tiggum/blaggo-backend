@@ -9,7 +9,7 @@ const post = require('./routes/post')
 
 const app = express()
 const port = process.env.PORT || 9001
-
+console.log(process.env)
 
 const corsOptions = {
     credentials: true,
