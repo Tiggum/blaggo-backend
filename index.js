@@ -2,7 +2,7 @@ const bodyParser = require("body-parser")
 const express = require('express')
 const cors = require('cors')
 const pool = require("./config")
-const session = require("cookie-session")
+const cookieSession = require("cookie-session")
 const cookieParser = require("cookie-parser")
 
 const user = require('./routes/user')
