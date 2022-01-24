@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     
-    const userid = req.cookies.userid
+    const userid = req.session.user.id
     const title = req.body.title
     const content = req.body.content
     
