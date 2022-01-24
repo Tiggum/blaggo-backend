@@ -17,24 +17,21 @@ const corsOptions = {
     
 }
 
+app.set("trust proxy", 1);
+
 app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(session({
     secret: 'yoursecret',
+    resave: true,
+    saveUninitialized: false,
     cookie: {
-        path: '/',
-        domain: 'herokuapp.com',
-        maxAge: 1000 * 60 * 24 // 24 hours
+      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
     }
 }));
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-    next();
-});
+
 
 app.use('/user', user)
 app.use('/post', post)
