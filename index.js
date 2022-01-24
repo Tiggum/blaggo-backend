@@ -25,7 +25,8 @@ app.use(
         name: 'backend',
         keys: ['SESS_SECRET'],
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'none'
+        sameSite: 'none',
+        secure: true
     }),
 );
 
