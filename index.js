@@ -26,15 +26,15 @@ app.use(session({
     secret: 'yoursecret',
     resave: true,
     saveUninitialized: false,
-    cookie: {
-      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
-    }
+    // cookie: {
+    //   sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+    //   secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+    // }
 }));
 
 
-app.use('/user', user)
-app.use('/post', post)
+app.use('/api/user', user)
+app.use('/api/post', post)
 
 app.listen(port, () =>
     console.log(`Listening on port ${port}`)

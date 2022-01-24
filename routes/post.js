@@ -36,10 +36,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     
-    const userid = req.body.id
+    const userid = req.body.userid
     const title = req.body.title
     const content = req.body.content
 
+    console.log(userid)
     
     pool.query('INSERT INTO "post" (userid, title, content) values ($1, $2, $3)', [userid, title, content], (error, results) => {
         if (error) {
@@ -75,7 +76,7 @@ router.patch('/', (req, res) => {
     const content = req.body.content
 
 
-    pool.query('UPDATE "post" SET title=$1,content=$2 WHERE id=$3', [ title, content, id], (error, results) => {
+    pool.query('UPDATE "post" SET title=$1,content=$2 WHERE id=$3', [ title, content, id ], (error, results) => {
         if (error) {
             throw error
         }

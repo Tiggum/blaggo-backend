@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "post" (
     id SERIAL PRIMARY KEY,
-    userid INTEGER REFERENCES "user"(id),
+    userid INTEGER REFERENCES "user"(id) NOT NULL,
     title VARCHAR(255),
     content TEXT,
     creationtime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
