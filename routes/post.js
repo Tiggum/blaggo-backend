@@ -57,4 +57,20 @@ router.delete('/', (req, res) => {
     })
 
 })
+
+router.patch('/', (req, res) => {
+    const id = req.body.id
+
+    pool.query('UPDATE "post" SET title=$2,content=$3 WHERE id=$1', [id, title, content], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json({
+            status:200,
+            message: results
+        })
+    })
+
+
+})
 module.exports = router
