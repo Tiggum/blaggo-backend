@@ -36,9 +36,10 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     
-    const userid = req.session.user.id
+    const userid = req.body.id
     const title = req.body.title
     const content = req.body.content
+
     
     pool.query('INSERT INTO "post" (userid, title, content) values ($1, $2, $3)', [userid, title, content], (error, results) => {
         if (error) {
@@ -54,9 +55,9 @@ router.post('/', (req, res) => {
 
 router.delete('/', (req, res) => {
     const postid = req.body.id
-    const userid =  req.cookies.userid
+    const userid =  req.body.userid
 
-    pool.query('DELETE FROM "post" where id=$1 userid=$2 ', [postid, userid], (error, results) => {
+    pool.query('DELETE FROM "post" WHERE id=$1 ', [postid], (error, results) => {
         if (error) {
             throw error
         }
@@ -73,7 +74,8 @@ router.patch('/', (req, res) => {
     const title = req.body.title
     const content = req.body.content
 
-    pool.query('UPDATE "post" SET title=$2,content=$3 WHERE id=$1', [id, title, content], (error, results) => {
+
+    pool.query('UPDATE "post" SET title=$1,content=$2 WHERE id=$3', [ title, content, id], (error, results) => {
         if (error) {
             throw error
         }
