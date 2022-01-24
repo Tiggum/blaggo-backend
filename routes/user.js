@@ -28,15 +28,13 @@ router.post('/register', (req, res) => {
 
     const saltRounds = 10
     const hash = bcrypt.hashSync(password, saltRounds)
-        console.log('before')
     pool.query('INSERT INTO "user" (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING *', [firstname, lastname, username, hash], (error, results) => {
         if (error) {
-            res.status(500).json({
-                status: 500,
+            res.status(409).json({
+                status: 409,
                 message: error
             })
         } else {
-            console.log('after')   
             res.status(200).json({
                 status: 200,
                 message: "Account Created"

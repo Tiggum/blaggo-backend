@@ -14,9 +14,11 @@ console.log(process.env.DATABASE_URL)
 
 const corsOptions = {
     credentials: true,
-    origin: '*'
+    origin: '*',
+    
 }
 
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(
     session({ secret: "Blaggo", resave: true, saveUninitialized: true })
