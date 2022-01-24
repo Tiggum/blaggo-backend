@@ -21,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(
-    session({ secret: "Blaggo", resave: true, saveUninitialized: true, cookie: {sameSite: 'none', secure: true}})
+    session({ secret: "Blaggo", resave: true, saveUninitialized: true, cookie: {sameSite: 'none', secure: false}})
 );
 
 app.use('/user', user)
