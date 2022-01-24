@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     
-    const userid = req.session.user.id
+    const userid = req.cookies.userid
     const title = req.body.title
     const content = req.body.content
     
@@ -41,4 +41,20 @@ router.post('/', (req, res) => {
     })
 })
 
+
+router.delete('/', (req, res) => {
+    const postid = req.body.id
+    const userid =  req.cookies.userid
+
+    pool.query('DELETE FROM "post" where id=$1 userid=$2 ', [postid, userid], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json({
+            status:200,
+            message: results
+        })
+    })
+
+})
 module.exports = router
