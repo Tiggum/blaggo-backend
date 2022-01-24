@@ -60,6 +60,8 @@ router.delete('/', (req, res) => {
 
 router.patch('/', (req, res) => {
     const id = req.body.id
+    const title = req.body.title
+    const content = req.body.content
 
     pool.query('UPDATE "post" SET title=$2,content=$3 WHERE id=$1', [id, title, content], (error, results) => {
         if (error) {
