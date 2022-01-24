@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const pool = require("./config")
 const session = require("express-session")
+const cookieParser = require("cookie-parser")
 
 const user = require('./routes/user')
 const post = require('./routes/post')
@@ -19,9 +20,10 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(
-    session({ secret: "Blaggo", resave: true, saveUninitialized: true, cookie: {sameSite: 'none', secure: false}})
+    session({ secret: "Blaggo", resave: true, saveUninitialized: true})
 );
 
 app.use('/user', user)

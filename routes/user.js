@@ -62,6 +62,8 @@ router.post('/login', (req, res) => {
                 sessionData.user.id = id
                 sessionData.user.username = username
 
+                res.cookie('userid', id)
+
                 res.status(200).json({
                     status: 200,
                     message: 'Login Successful'
