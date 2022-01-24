@@ -14,7 +14,7 @@ console.log(process.env.DATABASE_URL)
 
 const corsOptions = {
     credentials: true,
-    origin: '*',
+    origin: ['https://blaggo.herokuapp.com', 'http://localhost:3000'],
     
 }
 
