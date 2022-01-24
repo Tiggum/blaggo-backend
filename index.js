@@ -2,7 +2,7 @@ const bodyParser = require("body-parser")
 const express = require('express')
 const cors = require('cors')
 const pool = require("./config")
-const cookieSession = require("cookie-session")
+const session = require("express-session")
 const cookieParser = require("cookie-parser")
 
 const user = require('./routes/user')
@@ -20,15 +20,21 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json());
-app.use(
-    cookieSession({
-        name: 'backend',
-        keys: ['SESS_SECRET'],
-        maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'none',
-        secure: true
-    }),
-);
+app.use(session({
+    secret: 'yoursecret',
+    cookie: {
+        path: '/',
+        domain: 'herokuapp.com',
+        maxAge: 1000 * 60 * 24 // 24 hours
+    }
+}));
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    next();
+});
 
 app.use('/user', user)
 app.use('/post', post)
