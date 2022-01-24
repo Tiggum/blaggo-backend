@@ -24,6 +24,16 @@ router.get('/', (req, res) => {
 
 })
 
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    pool.query('SELECT * FROM post WHERE id=$1',[id], (error, results) => {
+        if (error) {
+            throw error
+        }
+    res.status(200).json(results.rows)
+})
+})
+
 router.post('/', (req, res) => {
     
     const userid = req.cookies.userid
