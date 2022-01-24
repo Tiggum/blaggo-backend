@@ -62,7 +62,12 @@ router.post('/login', (req, res) => {
                 sessionData.user.id = id
                 sessionData.user.username = username
 
-                res.cookie('userid', id)
+                res.cookie('userid', id, {
+                    maxAge: new Date() * 0.001 + 300,
+                    domain: 'herokuapp.com',
+                    secure: true,
+                    sameSite:'none',
+                  })
 
                 res.status(200).json({
                     status: 200,
